@@ -102,24 +102,25 @@ const FileUpload: React.FC<FileUploadProps> = ({
   };
 
   return (
-    <div className="file-upload">
-      <h2>Upload JSON File</h2>
-      <div className="upload-container">
-        <input 
-          type="file" 
-          accept=".json,application/json" 
-          onChange={handleFileChange} 
+    <div className="file-upload file-upload-header">
+      <div className="upload-row">
+        <label htmlFor="file-upload-input" className="file-upload-label">Upload JSON:</label>
+        <input
+          id="file-upload-input"
+          type="file"
+          accept=".json,application/json"
+          onChange={handleFileChange}
         />
-        <button 
-          onClick={handleUpload} 
+        <button
+          onClick={handleUpload}
           disabled={!file || isLoading}
         >
           {isLoading ? 'Uploading...' : 'Upload'}
         </button>
+        {file && <span className="file-upload-filename">{file.name}</span>}
       </div>
-      {file && <p>Selected file: {file.name}</p>}
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">File uploaded successfully!</p>}
+      {error && <span className="error">{error}</span>}
+      {success && <span className="success">File uploaded!</span>}
     </div>
   );
 };
